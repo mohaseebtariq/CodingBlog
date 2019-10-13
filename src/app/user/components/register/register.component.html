@@ -1,0 +1,79 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+
+      <div *ngIf="invalidLogin" class='notification is-danger' >
+          <p class="help subtitle is-6 is-white">
+            {{errMsg}}
+          </p>
+      </div>
+
+    <h2 [routerLink]="['/auth/login']" class="inactive underlineHover"> Sign In </h2>
+    <h2 class="active">Sign Up </h2>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <input type="email" autocomplete="true" formControlName="email" id="email" class="fadeIn second" name="email" placeholder="email">
+
+      <div *ngIf="f['email'].invalid && (f['email'].dirty || f['email'].touched)">
+        <p *ngIf="f['email'].errors['required']" class="help subtitle is-6 is-danger">
+          Email password is required.
+        </p>
+
+        <p *ngIf="f['email'].errors['email']" class="help subtitle is-6 is-danger">
+          Please enter a valid email.
+        </p>
+
+      </div>
+
+      <input formControlName="username" autocomplete="true" type="text" id="username" class="fadeIn second" name="username"
+        placeholder="username">
+
+      <div *ngIf="f['username'].invalid && (f['username'].dirty || f['username'].touched)">
+        <p *ngIf="f['username'].errors['required']" class="help subtitle is-6 is-danger">
+          Username is required.
+        </p>
+
+        <p *ngIf="f['username'].errors['minlength']" class=" help subtitle is-6 is-danger">
+          Username should be minimum {{ f['username'].errors['minlength']['requiredLength'] }} characters.
+        </p>
+
+      </div>
+
+
+      <input formControlName="password" autocomplete="true" type="password" id="password" class="fadeIn third" name="password"
+        placeholder="password" >
+
+      <div *ngIf="f['password'].invalid && (f['password'].dirty || f['password'].touched)">
+        <p *ngIf="f['password'].errors['required']" class="help subtitle is-6 is-danger">
+          Password is required.
+        </p>
+
+        <p *ngIf="f['password'].errors['minlength']" class=" help subtitle is-6 is-danger">
+          Password should be maximum {{ f['password'].errors['minlength']['requiredLength'] }} characters.
+        </p>
+
+      </div>
+
+
+      <input formControlName="confirmPass" autocomplete="true" type="password" id="cpassword" class="fadeIn third" name="cpassword"
+        placeholder="confirm password">
+
+      <div *ngIf="f['confirmPass'].invalid && (f['confirmPass'].dirty || f['confirmPass'].touched)">
+        <p *ngIf="f['confirmPass'].errors['required']" class="help subtitle is-6 is-danger">
+          Confirm password is required.
+        </p>
+
+        <p *ngIf="f['confirmPass'].errors.mustMatch" class="help subtitle is-6 is-danger">
+          Passwords don't match.
+        </p>
+
+      </div>
+
+      <input type="submit" [disabled]="!registerForm.valid" class="disable fadeIn fourth" value="Register">
+    </form>
+
+    <div id="formFooter">
+
+    </div>
+
+  </div>
+</div>

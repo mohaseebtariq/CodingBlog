@@ -1,0 +1,31 @@
+.navbar {
+  height: 80px;
+  background-color: transparent;
+  border: none;
+  /* z-index: 100; */
+  transition: background-color 1s ease 0s;
+}
+
+a.navbar-item:hover {
+  background-color: transparent;
+  color: #eadede !important;
+}
+
+a.navbar-item:active,
+a.navbar-item {
+  background-color: transparent;
+}
+
+/* .is-transparent .button {
+  background: transparent !important;
+  border: none !important;
+  color: white;
+}
+
+.is-transparent .button:hover {
+  color: #eadede !important;
+}
+
+ .button:focus , .button:active, .button:visited, .button:hover {
+    outline: none;
+  } */

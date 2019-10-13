@@ -1,0 +1,27 @@
+<section class="hero is-fullheight">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title is-1 has-text-white has-text-centered">
+        Coding Blog
+      </h1>
+      <br>
+      <h2 class="subtitle is-3 has-text-white has-text-centered">
+        Get updates regarding latest web technologies and tutorials related to popular frameworks and programming
+        languages.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<div class="container is-fullhd has-background-light">
+  <article *ngFor="let post of posts" class="section">
+    <div class="card-article container post-container has-background-white">
+      <h1 class="title is-1">{{post.title}}</h1>
+      <p class="is-size-5">
+        {{post.content}}
+      </p>
+      <br>
+      By <b>{{post.username}}</b> - At <b>{{post.createdAt | date:'dd MMMM, yyyy'}}</b>
+    </div>
+  </article>
+</div>

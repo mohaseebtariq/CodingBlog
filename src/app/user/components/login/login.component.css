@@ -1,0 +1,11 @@
+.s-err {
+  margin-top: 1em;
+}
+
+.notification {
+  background-color: #bf3545 !important;
+  margin-top: 2em;
+  margin-left: 5em;
+  margin-right: 5em;
+  padding: 2px;
+}

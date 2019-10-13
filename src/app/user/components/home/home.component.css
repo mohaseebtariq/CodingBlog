@@ -1,0 +1,39 @@
+
+.hero {
+  margin-top: -5em;
+  margin-bottom: 10em;
+}
+
+.hero-body {
+  margin-bottom: 3em !important;
+  position: fixed;
+  min-height: 120vh;
+  width: 100%;
+  background: url("src/assets/images/header-cover.jpg");
+  background-size: cover;
+}
+
+
+.bg-back {
+  position: relative;
+  background: #F6F6F6;
+}
+
+
+.post-container {
+  position: relative;
+  top: -8em;
+  padding: 2em;
+}
+
+.container.is-fullhd {
+  min-width: 100%;
+}
+
+.hero-body .container {
+  margin-bottom: 5em;
+}
+
+.card-article {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}

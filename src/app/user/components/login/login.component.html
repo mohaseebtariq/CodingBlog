@@ -1,0 +1,44 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+
+      <div *ngIf="invalidLogin" class='notification is-danger' >
+          <p class="help subtitle is-6 is-white">
+            {{errMsg}}
+          </p>
+      </div>
+
+    <h2 class="active"> Sign In </h2>
+    <h2 [routerLink]="['/auth/register']" class="inactive underlineHover">Sign Up </h2>
+
+
+    <form [formGroup]="loginForm" (ngSubmit)="OnSubmit()">
+      <input formControlName="username" autocomplete="on" type="text" id="login" class="fadeIn second" name="username"
+        placeholder="username">
+
+      <div *ngIf="f['username'].invalid && (f['username'].dirty || f['username'].touched)">
+        <p *ngIf="f['username'].errors['required']" class="help subtitle is-6 is-danger">
+          username is required
+        </p>
+
+      </div>
+
+      <input formControlName="password" autocomplete="on" type="password" id="password" class="fadeIn third" name="password"
+        placeholder="password">
+
+      <div *ngIf="f['password'].invalid && (f['password'].dirty || f['password'].touched)">
+        <p *ngIf="f['password'].errors['required']" class="help subtitle is-6 is-danger">
+          password is required
+        </p>
+
+      </div>
+
+      <input type="submit" [disabled]="!loginForm.valid" class="disable fadeIn fourth" value="Log In">
+    </form>
+
+    <div id="formFooter">
+      <a class="underlineHover">Forgot Password?</a>
+
+    </div>
+
+  </div>
+</div>

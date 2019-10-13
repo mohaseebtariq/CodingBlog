@@ -1,0 +1,35 @@
+<nav appWindowScroll class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item">
+      <p class="title is-3 has-text-white">Blog</p>
+    </a>
+
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbar" class="navbar-menu">
+    <div class="navbar-start">
+      <a [routerLink]="['/']" class="navbar-item has-text-white">
+        Home
+      </a>
+
+      <a class="navbar-item has-text-white">
+        About
+      </a>
+
+      <a class="navbar-item has-text-white">
+        Contact Us
+      </a>
+
+    </div>
+
+    <div class="navbar-end">
+      <a [routerLink]="['/auth/login']" class="navbar-item  has-text-white">Login</a>
+      <a [routerLink]="['/auth/register']" class="navbar-item  has-text-white">Sign up</a>
+    </div>
+  </div>
+</nav>
