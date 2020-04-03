@@ -4,7 +4,10 @@ const db = require("../config/db");
 
 exports.validatePost = (req, res, next) => {
   const {
-    body: { title, content }
+    body: {
+      title,
+      content
+    }
   } = req;
 
   const postSchema = Joi.object().keys({
@@ -21,12 +24,19 @@ exports.validatePost = (req, res, next) => {
   });
 
   const validate = Joi.validate(req.body, postSchema);
-  const { value, error } = validate;
+  const {
+    value,
+    error
+  } = validate;
 
   if (error) {
-    const { details } = error;
+    const {
+      details
+    } = error;
     const message = details.map(err => err.message).join(",");
-    return res.status(422).json({ error: message });
+    return res.status(422).json({
+      error: message
+    });
   } else {
     req = value;
     next();
@@ -35,7 +45,10 @@ exports.validatePost = (req, res, next) => {
 
 exports.createPost = async (req, res) => {
   const {
-    body: { title, content }
+    body: {
+      title,
+      content
+    }
   } = req;
 
   const date = new Date();
@@ -60,7 +73,9 @@ exports.createPost = async (req, res) => {
     }
     return res.status(201).json(response);
   } catch (err) {
-    return res.status(500).json({ Error: "Internal Server Error" });
+    return res.status(500).json({
+      Error: "Internal Server Error"
+    });
   }
 };
 
@@ -81,7 +96,9 @@ exports.getPostById = async (req, res) => {
       });
     }
   } catch (err) {
-    res.status(404).json({ Error: err });
+    res.status(404).json({
+      Error: err
+    });
   }
 };
 
@@ -92,7 +109,11 @@ exports.getUserPosts = async (req, res) => {
     const verified = jwt.verify(token, process.env.TOKEN_SECRET);
     const uid = verified.id;
 
-    const posts = await db.posts.findAll({ where: { user_id: uid } });
+    const posts = await db.posts.findAll({
+      where: {
+        user_id: uid
+      }
+    });
     if (!posts.length) {
       throw "No Post Found";
     }
@@ -117,7 +138,10 @@ exports.deleteSinglePost = async (req, res) => {
     const userId = req.userId;
     const postId = req.params.postId;
     const findPost = await db.posts.findAll({
-      where: { id: postId, user_id: userId }
+      where: {
+        id: postId,
+        user_id: userId
+      }
     });
     // const findPost = await db.posts.findByPk(postId);
     if (findPost.length === 0) {
@@ -138,7 +162,9 @@ exports.deleteSinglePost = async (req, res) => {
       return res.status(200).json(response);
     }
   } catch (err) {
-    return res.status(404).json({ Error: err });
+    return res.status(404).json({
+      Error: err
+    });
   }
 };
 
@@ -147,11 +173,17 @@ exports.updateSinglePost = async (req, res) => {
   const userId = req.userId;
   try {
     const {
-      body: { title, content }
+      body: {
+        title,
+        content
+      }
     } = req;
     const postId = req.params.postId;
     const findPost = await db.posts.findAll({
-      where: { id: postId, user_id: userId }
+      where: {
+        id: postId,
+        user_id: userId
+      }
     });
 
     if (findPost.length === 0) {
@@ -159,7 +191,10 @@ exports.updateSinglePost = async (req, res) => {
     } else {
       let response;
       const updatedPost = findPost.map(post => {
-        post.update({ title: title, content: content });
+        post.update({
+          title: title,
+          content: content
+        });
         response = {
           id: post.dataValues.id,
           title: post.dataValues.title,
@@ -171,6 +206,8 @@ exports.updateSinglePost = async (req, res) => {
       return res.status(200).json(response);
     }
   } catch (err) {
-    return res.status(404).json({ Error: err });
+    return res.status(404).json({
+      Error: err
+    });
   }
 };

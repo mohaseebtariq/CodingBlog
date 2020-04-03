@@ -8,13 +8,19 @@ module.exports = async (req, res, next) => {
     const verified = await jwt.verify(token, process.env.TOKEN_SECRET);
     const uid = verified.id;
 
-    const checkRole = await db.users.findOne({ where: { id: uid } });
+    const checkRole = await db.users.findOne({
+      where: {
+        id: uid
+      }
+    });
     if (checkRole.role === "admin") {
       next();
     } else {
       throw "Unauthorized";
     }
   } catch (err) {
-    return res.status(401).json({ Error: err });
+    return res.status(401).json({
+      Error: err
+    });
   }
 };

@@ -1,32 +1,33 @@
 import { Routes } from "@angular/router";
-import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
-import { UserLayoutComponent } from './layouts/user-layout/user-layout.component';
+import { HomeComponent } from "./components/home/home.component";
+import { LoginComponent } from "./components/login/login.component";
+import { RegisterComponent } from "./components/register/register.component";
+import { UserLayoutComponent } from "./layouts/user-layout/user-layout.component";
+import { RoleGuardService } from "./shared/guards/role-guard.service";
 
 export const routes: Routes = [
   {
-    path: '',
+    path: "",
     component: UserLayoutComponent,
     children: [
       {
-        path: '',
+        path: "",
         component: HomeComponent,
-        pathMatch: 'full'
+        pathMatch: "full"
       },
       {
-        path: 'auth/login',
+        path: "auth/login",
         component: LoginComponent
       },
       {
-        path: 'auth/register',
+        path: "auth/register",
         component: RegisterComponent
       },
       {
-        path: 'auth',
-        redirectTo: 'auth/login',
-        pathMatch: 'full'
+        path: "auth",
+        redirectTo: "auth/login",
+        pathMatch: "full"
       }
     ]
   }
-]
+];

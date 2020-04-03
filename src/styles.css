@@ -173,6 +173,7 @@ input[type="password"]::placeholder {
     -webkit-transform: translate3d(0, -100%, 0);
     transform: translate3d(0, -100%, 0);
   }
+
   100% {
     opacity: 1;
     -webkit-transform: none;
@@ -186,6 +187,7 @@ input[type="password"]::placeholder {
     -webkit-transform: translate3d(0, -100%, 0);
     transform: translate3d(0, -100%, 0);
   }
+
   100% {
     opacity: 1;
     -webkit-transform: none;
@@ -198,22 +200,27 @@ input[type="password"]::placeholder {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
 }
+
 @-moz-keyframes fadeIn {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
 }
+
 @keyframes fadeIn {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -297,4 +304,8 @@ input[type="password"]::placeholder {
 
 input[type="submit"][disabled] {
   cursor: not-allowed;
+}
+
+.ck-editor__editable_inline {
+  min-height: 200px;
 }

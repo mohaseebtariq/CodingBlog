@@ -7,7 +7,11 @@ const Op = Sequelize.Op;
 
 exports.validateUser = (req, res, next) => {
   const {
-    body: { email, username, password }
+    body: {
+      email,
+      username,
+      password
+    }
   } = req;
 
   const userSchema = Joi.object().keys({
@@ -42,13 +46,20 @@ exports.validateUser = (req, res, next) => {
   });
 
   const result = Joi.validate(req.body, userSchema);
-  const { value, error } = result;
+  const {
+    value,
+    error
+  } = result;
 
   if (error) {
-    const { details } = error;
+    const {
+      details
+    } = error;
 
     const message = details.map(err => err.message).join(",");
-    return res.status(422).json({ error: message });
+    return res.status(422).json({
+      error: message
+    });
   } else {
     req = value;
     next();
@@ -57,7 +68,11 @@ exports.validateUser = (req, res, next) => {
 
 exports.registerUser = async (req, res) => {
   const {
-    body: { username, password, email }
+    body: {
+      username,
+      password,
+      email
+    }
   } = req;
   const hashedPassword = await bcrypt.hash(password, 8);
   const date = new Date();
@@ -67,7 +82,13 @@ exports.registerUser = async (req, res) => {
 
   try {
     const [user, created] = await db.users.findOrCreate({
-      where: { [Op.or]: [{ username: username }, { email: mail }] },
+      where: {
+        [Op.or]: [{
+          username: username
+        }, {
+          email: mail
+        }]
+      },
       defaults: {
         username: username,
         email: mail,
@@ -87,10 +108,14 @@ exports.registerUser = async (req, res) => {
     }
     return res
       .status(303)
-      .json({ Message: "Username or email already exists" });
+      .json({
+        Message: "Username or email already exists"
+      });
   } catch (err) {
     // const details  = err.errors.map(e => e.message).join(',');
-    return res.status(500).json({ Message: "Internal Server Error" });
+    return res.status(500).json({
+      Message: "Internal Server Error"
+    });
   }
 };
 
@@ -106,12 +131,19 @@ exports.validateLoginUser = (req, res, next) => {
   });
   const result = Joi.validate(req.body, loginSchema);
 
-  const { value, error } = result;
+  const {
+    value,
+    error
+  } = result;
 
   if (error) {
-    const { details } = error;
+    const {
+      details
+    } = error;
     const validateError = details.map(e => e.message).join(",");
-    return res.status(422).json({ error: validateError });
+    return res.status(422).json({
+      error: validateError
+    });
   } else {
     req = value;
     next();
@@ -120,11 +152,18 @@ exports.validateLoginUser = (req, res, next) => {
 
 exports.authenticateUser = async (req, res, next) => {
   const {
-    body: { username, password }
+    body: {
+      username,
+      password
+    }
   } = req;
 
   try {
-    const user = await db.users.findOne({ where: { username: username } });
+    const user = await db.users.findOne({
+      where: {
+        username: username
+      }
+    });
     if (user === null) {
       throw "Invalid Username";
     } else {
@@ -133,16 +172,24 @@ exports.authenticateUser = async (req, res, next) => {
       if (!validPassword) {
         throw "Invalid Password";
       } else {
-        const token = jwt.sign(
-          { id: user.id, username: user.username, role: user.role },
-          process.env.TOKEN_SECRET,
-          { expiresIn: "1h" }
+        const token = jwt.sign({
+            id: user.id,
+            username: user.username,
+            role: user.role
+          },
+          process.env.TOKEN_SECRET, {
+            expiresIn: "1h"
+          }
         );
-        return res.status(200).json({ "auth-token": token });
+        return res.status(200).json({
+          "auth-token": token
+        });
       }
     }
   } catch (err) {
     next(err);
-    return res.status(401).json({ Error: err });
+    return res.status(401).json({
+      Error: err
+    });
   }
 };
