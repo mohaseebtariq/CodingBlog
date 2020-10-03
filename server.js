@@ -1,18 +1,13 @@
-const http = require("http");
-const app = require("./server/app");
-const port = process.env.PORT || 5000;
+const express = require('express');
 
-const dotenv = require('dotenv');
-dotenv.config();
+const path = require('path');
 
-app.set(port);
+const app = express();
 
-const server = http.createServer(app);
+app.use(express.static(__dirname + '/dist/Blog'));
 
-server.on("listening", function () {
-  console.log("ok, server is running");
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/dist/Blog/index.html'));
 });
 
-server.listen(port, () => console.log(`Running on port: ${port}`));
-
-app.set("port", port);
+app.listen(process.env.PORT || 8080);
