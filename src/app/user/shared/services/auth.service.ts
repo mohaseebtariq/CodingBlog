@@ -9,8 +9,8 @@ import { Router } from "@angular/router";
   providedIn: "root"
 })
 export class AuthService {
-  private url = "http://localhost:5000/auth/login";
-  private regUrl = "http://localhost:5000/auth/signup";
+  private url = "https://coding-blog-api.herokuapp.com/auth/login";
+  private regUrl = "https://coding-blog-api.herokuapp.com/auth/signup";
 
   private jwtHelper = new JwtHelperService();
 

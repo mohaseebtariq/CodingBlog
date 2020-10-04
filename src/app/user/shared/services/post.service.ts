@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class PostService {
 
-  private url = 'http://localhost:5000/posts'
+  private url = 'https://coding-blog-api.herokuapp.com/posts'
 
   constructor(private http: HttpClient) {}
 
